@@ -1,5 +1,5 @@
 <template>
-    <aside class="main-sidebar sidebar-light-olive elevation-2">
+    <aside class="main-sidebar sidebar-light-dark elevation-2">
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
         <span class="brand-text font-weight-light texr-align-center">COMPANY NAME</span>
