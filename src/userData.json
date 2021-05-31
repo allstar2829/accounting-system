@@ -1,0 +1,14 @@
+{
+    "userData": [
+        {
+            "account": "iris",
+            "password": "1234",
+            "permission": "emp"
+        },
+        {
+            "account": "wuu",
+            "password": "666",
+            "permission": "super"
+        }
+    ]
+}

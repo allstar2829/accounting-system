@@ -10,10 +10,10 @@
                     <p class="login-box-msg">登入 Login</p>
                     <form method="post" class="mb-5">
                         <div class="input-group mb-3">
-                        <input v-model="userName" type="account" class="form-control" placeholder="Account">
+                        <input v-model="account" type="account" class="form-control" placeholder="Account">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                            <span class="fas fa-uesr"></span>
+                            <span class="fas fa-user"></span>
                             </div>
                         </div>
                         </div>
@@ -36,17 +36,17 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button @click="login" type="submit" class="btn btn-dark btn-block">登入</button>
+                            <button @click="login" type="button" class="btn btn-dark btn-block">登入</button>
                         </div>
                         <!-- /.col -->
                         </div>
                     </form>
 
                     <p class="mb-1">
-                        <a href="forgot-password.html"><small><b>忘記帳戶/密碼</b>　Forgot my account/password</small></a>
+                        <a href="forgot-password.html"><small><b class="mr-2">忘記帳戶/密碼</b>Forgot my account/password</small></a>
                     </p>
                     <p class="mb-0">
-                        <a href="register.html" class="text-center"><small><b>註冊新用戶</b>　Register a new membership</small></a>
+                        <a href="register.html" class="text-center"><small><b class="mr-2">註冊新用戶</b>Register a new membership</small></a>
                     </p>
                 </div>
                 <!-- /.login-card-body -->
@@ -57,22 +57,51 @@
 </template>
 
 <script>
-import store from '../store'
 
 export default {
     name: 'login',
     data(){
         return{
-            userName: '',
+            account: '',
             passWord: '',
         }
     },
     methods:{
         login(){
-            if(store.state.username == this.userName && store.state.password == this.passWord ){
-                this.$router.push("/");
+            if(this.account && this.passWord){
+                this.ajax()
+            }else{
+                alert('請輸入帳號密碼')
             }
+        },
+        ajax(){
+            if( this.account === 'iris' && this.passWord === '1234' ){
+                const userData = {
+                    userName:'IRIS',
+                    auth:'user'
+                }
+                const token = 'usertoken'
+                this.success(userData,token)
+            } else if ( this.account === 'wuu' && this.passWord === '666' ){
+                const userData = {
+                    userName:'WUU',
+                    auth:'super'
+                }
+                const token = 'bosstoken'
+                this.success(userData,token)
+            } else{
+                this.fail()
+            }
+        },
+        success(userData,token){
+            this.$store.commit('SET_USER_DATA',userData) 
+            this.$store.commit('SET_TOKEN',token)
+            this.$router.push("/") 
+        },
+        fail(){
+            console.log('登入失敗');
         }
     },
 }
+
 </script>

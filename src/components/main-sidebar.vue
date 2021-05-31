@@ -10,10 +10,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-            <img src="../assets/img/user4-128x128.jpg" class="img-circle elevation-1" alt="User Image">
+                <img src="../assets/img/user4-128x128.jpg" class="img-circle elevation-1" alt="User Image">
             </div>
             <div class="info">
-            <a href="#" class="d-block">Iris Chen</a>
+                <a href="#" class="d-block">{{$store.state.userData.userName}}</a>
             </div>
         </div>
 
@@ -21,47 +21,47 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-            <li class="nav-item menu-open">
-                <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
-                <p>
-                    個人功能頁
-                </p>
-                </a>
-            </li>
-
-            <li class="nav-item menu-open">
-                <a href="#" class="nav-link active">
-                <i class="nav-icon fas fa-calculator"></i>
-                <p>
-                    請款申請
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-                </a>
-                <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>申請表格</p>
+                    <a href="#" class="nav-link active" @click="toUserPage">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>個人功能頁</p>
                     </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-calculator"></i>
+                        <p>
+                            請款申請
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" @click="toFormPage">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>申請表格</p>
+                            </a>
+                        </li>
+                        <li class="nav-item" @click="toProcessPage" v-if="$store.state.userData.auth === 'super'">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>送審進度</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>送審進度</p>
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            其他報表
+                            <span class="right badge badge-danger">New</span>
+                        </p>
                     </a>
                 </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                    其他報表
-                    <span class="right badge badge-danger">New</span>
-                </p>
-                </a>
-            </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
@@ -73,6 +73,17 @@
 
 <script>
 export default {
-    name: 'main-sidebar'
+    name: 'main-sidebar',
+    methods: {
+        toUserPage(){
+            this.$router.push("/");
+        },
+        toProcessPage(){
+            this.$router.push("/content-process");
+        },
+        toFormPage(){
+            this.$router.push("/content-form");
+        }
+    },
 }
 </script>
