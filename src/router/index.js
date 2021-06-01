@@ -9,6 +9,12 @@ import contentDashBoard from '@/components/content-dash-board'
 import contentForm from '@/components/content-form'
 import contentProcess from '@/components/content-process'
 
+import formMainContent from '@/components/form-main-content'
+import formAccountInfo from '@/components/form-account-info'
+import formEmpOrReimbursement from '@/components/form-emp-or-reimbursement'
+import formVendorCompanyCard from '@/components/form-vendor-company-card'
+
+
 const routes = [
   {
     path: '/login',
@@ -23,17 +29,32 @@ const routes = [
       {
         path: "",
         component: contentDashBoard
-        // component: () => import('@/components/content-dash-board.vue'),
       },
       {
         path:'content-form',
-        component: contentForm
-        // component: () => import('@/components/content-form.vue'),
+        component: contentForm,
+        children:[
+          {
+            path:'',
+            component:formMainContent,
+          },
+          {
+            path:'/content-form/form-account-info',
+            component:formAccountInfo,
+          },
+          {
+            path:'/content-form/form-emp-or-reimbursement',
+            component:formEmpOrReimbursement,
+          },
+          {
+            path:'/content-form/form-vendor-company-card',
+            component:formVendorCompanyCard,
+          }
+        ],
       },
       {
         path:'content-process',
         component: contentProcess
-        // component: () => import('@/components/content-process.vue')
       },
     ],
     meta: { requireAuth: true },
